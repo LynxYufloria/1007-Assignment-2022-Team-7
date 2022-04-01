@@ -125,7 +125,7 @@ int main() {
         startQueue = endQueue;
         endQueue = endQueue+splitIndex;
         if(b == NO_OF_QUEUE-1){
-            endQueue = endQueue + (fileCount-(NO_OF_QUEUE*splitIndex))+1;
+            endQueue = fileCount;
         }
     }
 
