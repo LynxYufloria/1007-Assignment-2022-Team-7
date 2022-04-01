@@ -50,6 +50,7 @@ int main() {
     int startQueue = 0;
     int endQueue = 0;
     int time = 0;
+    float avgWaitTime = 0, avgTurnAround = 0, maxTurnAround = 0, maxWaitTime = 0;
 
     printf("Enter name of the file: ");
     scanf("%s", fileName);
@@ -132,6 +133,18 @@ int main() {
 //Calculate Waiting time
     for(int d = 0; d < fileCount; d++)
         jobArray[d].waitingTime = jobArray[d].turnaroundTime - jobArray[d].arrivalTime - jobArray[d].burstTime;
+
+//Calculate Avg Waiting Time and Avg Turnaround Time
+    for(int e = 0; e < fileCount; e++){
+        avgWaitTime += jobArray[e].waitingTime;
+        avgTurnAround += jobArray[e].turnaroundTime;
+        if (maxTurnAround < jobArray[e].turnaroundTime){
+            maxTurnAround = jobArray[e].turnaroundTime;
+        }
+        if (maxWaitTime < jobArray[e].waitingTime){
+            maxWaitTime = jobArray[e].waitingTime;
+        }
+    }
     
 //Print output
     printf("ProcessID\t\tArrivalTime\t\tBurstTime\t\tTurnaroundTime\t\tWaitingTime\t\tResponseTime\n");
@@ -139,6 +152,11 @@ int main() {
         printf("%d\t\t\t%d\t\t\t%d\t\t\t%d\t\t\t%d\t\t\t%d\t\t\t%d\n", jobArray[e].jobID, jobArray[e].arrivalTime, jobArray[e].burstTime, jobArray[e].turnaroundTime,
         jobArray[e].waitingTime, jobArray[e].responseTime, jobArray[e].remainingBT);
     }
-    
+//Print avg output
+
+    printf("\naverage turnaround time: %.2f", avgTurnAround/fileCount);
+    printf("\nmaximum turnaround time: %.2f", maxTurnAround);
+    printf("\naverage waiting time: %.2f", avgWaitTime/fileCount);
+    printf("\nmaximum waiting time: %.2f", maxWaitTime);
     return 0;
 }
