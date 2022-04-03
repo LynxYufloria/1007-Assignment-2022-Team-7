@@ -119,19 +119,19 @@ int main(int argc, char *argv[]) {
                         if(jobArray[c].remainingBT > queueTQArray[b]){
                             jobArray[c].remainingBT -= queueTQArray[b];
                             time = time + queueTQArray[b];
-                            oneJobDone = true;
+                            oneJobRun = true;
                         } else {
                             time = time + jobArray[c].remainingBT;
                             jobArray[c].remainingBT = 0;
                             jobArray[c].turnaroundTime = time;
-                            oneJobDone = true;
+                            oneJobRun = true;
                         }
                     }
                 }
-                if (oneJobDone == false){
+                if (oneJobRun == false){
                     time += 1;
                 }
-                oneJobDone = false;
+                oneJobRun = false;
             }
             if (jobArray[endQueue-1].remainingBT <= 0)
                 queuefinishCheck = true;
