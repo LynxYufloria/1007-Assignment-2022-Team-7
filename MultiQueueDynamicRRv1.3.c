@@ -128,11 +128,11 @@ int main(int argc, char *argv[]) {
                         }
                     }
                 }
-                if (oneJobRun == false){
+            }
+            if (oneJobRun == false){
                     time += 1;
                 }
                 oneJobRun = false;
-            }
             if (jobArray[endQueue-1].remainingBT <= 0)
                 queuefinishCheck = true;
         }
