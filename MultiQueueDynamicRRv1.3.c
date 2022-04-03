@@ -51,6 +51,7 @@ int main(int argc, char *argv[]) {
     int endQueue = 0;
     int time = 0;
     float avgWaitTime = 0, avgTurnAround = 0, maxTurnAround = 0, maxWaitTime = 0;
+    bool oneJobRun = false;
 
     if(argc == 2){
         fileName = argv[1];
@@ -118,13 +119,19 @@ int main(int argc, char *argv[]) {
                         if(jobArray[c].remainingBT > queueTQArray[b]){
                             jobArray[c].remainingBT -= queueTQArray[b];
                             time = time + queueTQArray[b];
+                            oneJobDone = true;
                         } else {
                             time = time + jobArray[c].remainingBT;
                             jobArray[c].remainingBT = 0;
                             jobArray[c].turnaroundTime = time;
+                            oneJobDone = true;
                         }
                     }
                 }
+                if (oneJobDone == false){
+                    time += 1;
+                }
+                oneJobDone = false;
             }
             if (jobArray[endQueue-1].remainingBT <= 0)
                 queuefinishCheck = true;
